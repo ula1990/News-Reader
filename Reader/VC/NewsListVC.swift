@@ -92,11 +92,11 @@ class NewsListVC: UIViewController {
                             article.publishedAt = publishedAt
                         }
                         self.news.append(article)
-                        self.navigationController?.topViewController?.title = (self.feed?.feedName)! + "(" + String(self.news.count) + ")"
+                        
                         }
                     }
-                DispatchQueue.main.async {
-                    self.listOfNews.reloadData()
+                DispatchQueue.main.async { 
+                    self.navigationController?.topViewController?.title = (self.feed?.feedName)! + "(" + String(self.news.count) + ")"
                     }
                 } catch let error {
                 print(error)
