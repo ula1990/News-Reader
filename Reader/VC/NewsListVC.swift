@@ -30,24 +30,7 @@ class NewsListVC: UIViewController {
         return table
     }()
     
-    lazy var titleView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 5
-        view.layer.shadowOpacity = 2
-        view.layer.shadowRadius = 6
-        return view
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .center
-        return label
-    }()
+
     
     lazy var numberOfArticles: UILabel = {
         let label = UILabel()
@@ -60,17 +43,11 @@ class NewsListVC: UIViewController {
         label.backgroundColor = .orange
         return label
     }()
-    
-    
 
     fileprivate func addAllViews() {
         view.addSubview(listOfNews)
         view.addSubview(navigationBar)
-        navigationBar.addSubview(titleView)
-        titleView.addSubview(titleLabel)
-        titleView.addSubview(numberOfArticles)
         setupView()
-        setupTitle()
     }
     
     override func viewDidLoad() {
@@ -80,9 +57,8 @@ class NewsListVC: UIViewController {
         urlString = feed?.url
         uploadNews(url: urlString!)
         addAllViews()
-        titleLabel.text = feed?.feedName
-        
-        
+        navigationController?.topViewController?.title = (feed?.feedName)! + "(" + "Updating" + ")"
+       
     }
 
     func setupView(){
@@ -92,28 +68,7 @@ class NewsListVC: UIViewController {
         listOfNews.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         listOfNews.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         listOfNews.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-
-    }
-    
-    func setupTitle(){
-        
-        titleView.centerXAnchor.constraint(equalTo: navigationBar.centerXAnchor).isActive = true
-        titleView.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor, constant: 15).isActive = true
-        titleView.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        titleLabel.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        titleLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        numberOfArticles.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5).isActive = true
-        numberOfArticles.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        numberOfArticles.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        numberOfArticles.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        
-        
+ 
     }
     
     func uploadNews(url: String){
@@ -124,7 +79,7 @@ class NewsListVC: UIViewController {
                 Alert.showBasic(title: "Problem with connection", msg: "Please check you internet connection", vc: self)
                 return
             }
-            
+            self.news.removeAll()
             self.news = [Article]()
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
@@ -143,12 +98,12 @@ class NewsListVC: UIViewController {
                         }
                         
                         self.news.append(article)
-                        
+                        self.navigationController?.topViewController?.title = (self.feed?.feedName)! + "(" + String(self.news.count) + ")"
                         }
                     }
                 DispatchQueue.main.async {
                     self.listOfNews.reloadData()
-                     self.numberOfArticles.text = "(" + String(self.news.count) + ")"
+                    
                     }
                 } catch let error {
                 print(error)

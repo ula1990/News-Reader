@@ -28,6 +28,7 @@ class FeedsListVC: UIViewController {
         listOfFeeds.dataSource = self
         setupView()
         feeds = creatTempArray(tokenKey: token)
+        view.backgroundColor = .white
 
     }
     
