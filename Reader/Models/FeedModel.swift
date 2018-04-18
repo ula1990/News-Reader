@@ -16,6 +16,4 @@ class Feed {
         self.feedName = feedName
         self.url = url
     }
-    
-    
 }

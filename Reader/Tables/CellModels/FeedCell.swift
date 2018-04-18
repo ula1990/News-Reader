@@ -19,7 +19,6 @@ class FeedCell: UITableViewCell {
         return label
     }()
     
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(feedName)
@@ -32,8 +31,6 @@ class FeedCell: UITableViewCell {
         feedName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         feedName.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         feedName.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

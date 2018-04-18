@@ -16,7 +16,6 @@ class NewsListVC: UIViewController {
     var news: [Article] = []
     var urlString: String?
     
-    
     lazy var navigationBar: UINavigationBar = {
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
         return navBar
@@ -29,9 +28,7 @@ class NewsListVC: UIViewController {
         table.register(NewsCell.self, forCellReuseIdentifier: newsCellId)
         return table
     }()
-    
 
-    
     lazy var numberOfArticles: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +55,6 @@ class NewsListVC: UIViewController {
         uploadNews(url: urlString!)
         addAllViews()
         navigationController?.topViewController?.title = (feed?.feedName)! + "(" + "Updating" + ")"
-       
     }
 
     func setupView(){
@@ -68,7 +64,6 @@ class NewsListVC: UIViewController {
         listOfNews.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         listOfNews.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         listOfNews.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
- 
     }
     
     func uploadNews(url: String){
@@ -96,20 +91,17 @@ class NewsListVC: UIViewController {
                             article.imageUrl = urlToImage
                             article.publishedAt = publishedAt
                         }
-                        
                         self.news.append(article)
                         self.navigationController?.topViewController?.title = (self.feed?.feedName)! + "(" + String(self.news.count) + ")"
                         }
                     }
                 DispatchQueue.main.async {
                     self.listOfNews.reloadData()
-                    
                     }
                 } catch let error {
                 print(error)
             }
         }
-        
         task.resume()
     }
 }

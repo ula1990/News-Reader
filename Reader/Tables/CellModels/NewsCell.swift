@@ -10,7 +10,6 @@ import UIKit
 
 class NewsCell: UITableViewCell {
     
-    
     lazy var newsTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +18,6 @@ class NewsCell: UITableViewCell {
         label.textAlignment = .left
         return label
     }()
-    
     
     lazy var newsDescription: UILabel = {
         let label = UILabel()
@@ -40,7 +38,6 @@ class NewsCell: UITableViewCell {
         return label
     }()
     
-    
     lazy var newsImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +46,6 @@ class NewsCell: UITableViewCell {
         image.layer.cornerRadius = 30
         return image
     }()
-    
     
     func updateData(title: String?, description: String? , imageUrl: String?, pubDate: String?){
         newsTitle.text = title
@@ -62,10 +58,8 @@ class NewsCell: UITableViewCell {
         }catch{
             print(error)
         }
-       
     }
-    
-    
+
     fileprivate func addViews() {
         addSubview(newsTitle)
         addSubview(newsDescription)
@@ -77,7 +71,6 @@ class NewsCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addViews()
-        
     }
     
     func setupCellView(){
@@ -86,7 +79,6 @@ class NewsCell: UITableViewCell {
         newsImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
         newsImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
         newsImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
         
         newsTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         newsTitle.leftAnchor.constraint(equalTo: newsImage.rightAnchor, constant: 20).isActive = true
@@ -98,12 +90,10 @@ class NewsCell: UITableViewCell {
         newsDescription.widthAnchor.constraint(equalToConstant: 250).isActive = true
         newsDescription.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        
         newsDate.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         newsDate.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         newsDate.widthAnchor.constraint(equalToConstant: 100).isActive = true
         newsDate.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -120,5 +110,4 @@ class NewsCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

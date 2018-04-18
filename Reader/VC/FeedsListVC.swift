@@ -29,7 +29,7 @@ class FeedsListVC: UIViewController {
         setupView()
         feeds = creatTempArray(tokenKey: token)
         view.backgroundColor = .white
-
+        navigationController?.topViewController?.title = "News Feeds"
     }
     
   //ONE OF THE OPTION HERE TO SEND THE DATA CAN BE PROTOCOLS AND DELEGATES
